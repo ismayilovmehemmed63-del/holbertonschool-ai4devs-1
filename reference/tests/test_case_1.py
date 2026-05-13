@@ -1,7 +1,12 @@
-import pytest
-from log_analyzer import LogAnalyzer
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from grade_analyzer import analyze_grades
 
 def test_case_1():
-    analyzer = LogAnalyzer()
-    line = '127.0.0.1 - - [10/Oct/2000:13:55:36 -0700] "GET /test_1 HTTP/1.0" 200 2326'
-    assert analyzer.parse_line(line)["status"] == 200
+    students = [{'name': 'Student1', 'score': 10}]
+    result = analyze_grades(students)
+    assert result['total_students'] == 1
+
+if __name__ == '__main__':
+    test_case_1()
+    print('Test 1 passed!')
